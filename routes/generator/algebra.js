@@ -27,7 +27,6 @@ router.get("/linear", (req, res) => {
     const problem = {};
     const solution = randInt(1, -20, 20, { nonZero: true });
     const nums = randInt(steps, -20, 20, { nonZero: true });
-    // const ops = [operations[randInt(1, 0, operations.length-1)], operations[randInt(1, 0, operations.length-1)]];
     const ops = [];
     for (let j=steps; j>0; j--) {
       ops.push(operations[randInt(1, 0, operations.length-1)]);
@@ -40,8 +39,9 @@ router.get("/linear", (req, res) => {
         case "mult":
           problemString = (j === 0) ? `${nums[j]}${problemString}` : `${nums[j]}(${problemString})`;
           break;
-        // case "div":
-        //   break;
+        case "div":
+          problemString = (j===0) ? `${problemString} / ${nums[j]}` : `(${problemString}) / ${nums[j]}`;
+          break;
         default:
           problemString = (nums[j] < 0) ? `${problemString} ${ops[j].symbol} (${nums[j]})` : `${problemString} ${ops[j].symbol} ${nums[j]}`;
       }
