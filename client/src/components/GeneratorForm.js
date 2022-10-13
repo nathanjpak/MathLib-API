@@ -21,7 +21,7 @@ const GeneratorForm = () => {
       let problem={};
       axios({
         method: "get",
-        url: "https://x-math.herokuapp.com/api/random"
+        url: "localhost:8000/gen/arith"
       })
         .then((response) => {
           problem = response.data;

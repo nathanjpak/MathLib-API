@@ -1,12 +1,12 @@
 const express = require("express");
-const { randInt } = require("../../util/functions");
+const { randInt, calcArithmetic } = require("../../util/functions");
 const router = express.Router();
 
 const operationsDefault = ["add", "sub", "mult", "div", "pow"];
 
 router.get("/", (req, res) => {
   const query = req.query;
-  const problems = {};
+  const problems = [];
   let count = 20;
   if (query.count) count = query.count;
   let operations = operationsDefault;
@@ -19,32 +19,37 @@ router.get("/", (req, res) => {
       case "add": 
         nums = randInt(2, 0, 999);
         problem.problem = `${nums[0]} + ${nums[1]}`;
-        problem.solution = nums[0] + nums[1];
+        problem.solution = calcArithmetic(operation, nums[0], nums[1]);
+        // problem.solution = nums[0] + nums[1];
         break;
       case "sub": 
         nums = randInt(2, 0, 999);
         problem.problem = `${nums[0]} - ${nums[1]}`;
-        problem.solution = nums[0] - nums[1];
+        problem.solution = calcArithmetic(operation, nums[0], nums[1]);
+        // problem.solution = nums[0] - nums[1];
         break;
       case "mult":
         nums = randInt(2);
         problem.problem = `${nums[0]} * ${nums[1]}`;
-        problem.solution = nums[0] * nums[1];
+        problem.solution = calcArithmetic(operation, nums[0], nums[1]);
+        // problem.solution = nums[0] * nums[1];
         break;
       case "div":
         nums = randInt(2);
         problem.problem = `${nums[0]} / ${nums[1]}`;
-        problem.solution = Math.round((nums[0] / nums[1]) * 100) / 100;
+        problem.solution = Math.round((calcArithmetic(operation, nums[0], nums[1]) * 100))/100;
+        // problem.solution = Math.round((nums[0] / nums[1]) * 100) / 100;
         break;
       default:
         let num1 = randInt(1, 0, 15);
         let num2 = randInt(1, 0, 6);
         problem.problem = `${num1}^${num2}`;
-        problem.solution = Math.pow(num1, num2);
+        problem.solution = calcArithmetic(operation, num1, num2);
+        // problem.solution = Math.pow(num1, num2);
     }
-    problems[`problem${i}`] = problem;
+    problems.push(problem);
   }
-  res.send({operations: operations, problems: problems});
+  res.send(problems);
 });
 
 module.exports = router;
