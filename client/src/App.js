@@ -1,14 +1,30 @@
 import './App.css';
-import MathJax from "@innodoc/react-mathjax-node";
+import { MathJaxContext, MathJax } from "better-react-mathjax";
+import GeneratorForm from './components/GeneratorForm';
+
+const config = {
+  loader: { load: ["[tex]/html"] },
+  tex: {
+    packages: { "[+]": ["html"] },
+    inlineMath: [
+      ["$", "$"],
+      ["\\(", "\\)"]
+    ],
+    displayMath: [
+      ["$$", "$$"],
+      ["\\[", "\\]"]
+    ]
+  }
+};
 
 const App = () => {
   return (
-    <MathJax.Provider>
-      <p>
-        Inline Math:{' '}
-        <MathJax.MathJaxNode displayType="inline" texCode="f(x)=x^2+b_1" />
-      </p>
-    </MathJax.Provider>
+    <div>
+      <MathJaxContext version={3} config={config} onError={(error) => console.log(error)}>
+        <GeneratorForm />
+        <MathJax>{`$2x^4 = 100$`}</MathJax>
+      </MathJaxContext>
+    </div>    
   );
 }
 
