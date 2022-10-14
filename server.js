@@ -17,6 +17,16 @@ app.use(
 
 app.use(bodyParser.json());
 
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  next();
+});
+
 app.use("/test", testRoutes);
 app.use("/gen/arith", arithRoutes);
 app.use("/gen/alg", algRoutes);

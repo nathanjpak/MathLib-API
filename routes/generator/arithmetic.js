@@ -30,13 +30,13 @@ router.get("/", (req, res) => {
         break;
       case "mult":
         nums = randInt(2);
-        problem.problem = `${nums[0]} * ${nums[1]}`;
+        problem.problem = `${nums[0]} \\cdot ${nums[1]}`;
         problem.solution = calcArithmetic(operation, nums[0], nums[1]);
         // problem.solution = nums[0] * nums[1];
         break;
       case "div":
         nums = randInt(2);
-        problem.problem = `${nums[0]} / ${nums[1]}`;
+        problem.problem = `${nums[0]} \\div ${nums[1]}`;
         problem.solution = Math.round((calcArithmetic(operation, nums[0], nums[1]) * 100))/100;
         // problem.solution = Math.round((nums[0] / nums[1]) * 100) / 100;
         break;

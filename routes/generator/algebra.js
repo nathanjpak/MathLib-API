@@ -49,9 +49,9 @@ router.get("/linear", (req, res) => {
     }
     problem.problem = problemString;
     problem.solution = solution;
-    problem.nums = nums;
-    problem.ops = ops;
-    problem.result = result;
+    // problem.nums = nums;
+    // problem.ops = ops;
+    // problem.result = result;
     problems.push(problem);
   }
   res.send(problems);
