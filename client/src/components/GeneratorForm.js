@@ -1,3 +1,4 @@
+import "../stylesheets/GeneratorForm.css";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { MathJax } from "better-react-mathjax";
@@ -22,26 +23,25 @@ const GeneratorForm = () => {
 
   return (
     <>
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <select {...register("topic")}>
-        <option value="arithmetic">Arithmetic</option>
-        <option value="linearEquations">Linear Equations</option>
-      </select>
-      {/* <select {...register("solutions")}>
-        <option value="posInts">Positive Integers</option>
-        <option value="ints">Integers</option>
-        <option value="nonZeroInts">Non-Zero Integers</option>
-        <option value="rationals">Rational Numbers</option>
-        <option value="irrationals">Irrational Numbers</option>
-        <option value="reals">Real Numbers</option>
-      </select> */}
-      <input {...register("problemsCount", { min: 1, max: 100 })} type="number" placeholder="How many problems?" />
-      <input type="submit"/>
+    <form className="main-form" 
+      onSubmit={handleSubmit(onSubmit)}>
+
+      <div className="form-div-50">
+        <label htmlFor="topic">Topic</label>
+        <select className="input-100" id="topic" {...register("topic")}>
+          <option value="arithmetic">Arithmetic</option>
+          <option value="linearEquations">Linear Equations</option>
+        </select>
+      </div>
+      
+      <label htmlFor="problemsCount">Number of Problems</label>
+      <input className="input-100" {...register("problemsCount", { min: 1, max: 100 })} type="number" placeholder="Default: 20" />
+      <button className="generate-button" type="submit">Generate</button>
     </form>
-    <button onClick={() => console.log(problems)}>State</button>
-    <div>
+    {/* <button onClick={() => console.log(problems)}>State</button> */}
+    <div className="generated-problems">
       {problems.map((problem, index) => (
-        <div key={`problem${index}`}> 
+        <div className="generated-problem" key={`problem${index}`}> 
           <h3>Problem {index+1}</h3>
           <p><MathJax>{`$${problem.problem}$`}</MathJax></p>
           <p>Solution&#40;s&#41;: {problem.solution}</p>

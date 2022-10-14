@@ -1,5 +1,4 @@
-import './App.css';
-import { MathJaxContext, MathJax } from "better-react-mathjax";
+import { MathJaxContext } from "better-react-mathjax";
 import GeneratorForm from './components/GeneratorForm';
 
 const config = {
@@ -19,10 +18,9 @@ const config = {
 
 const App = () => {
   return (
-    <div>
+    <div className="container">
       <MathJaxContext version={3} config={config} onError={(error) => console.log(error)}>
         <GeneratorForm />
-        <MathJax>{`$2x^4 = 100$`}</MathJax>
       </MathJaxContext>
     </div>    
   );
