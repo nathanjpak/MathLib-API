@@ -6,7 +6,7 @@ export const genArith = (count, updateState) => {
   if (count) queryString = `${queryString}count=${count}`
   axios({
     method: "get",
-    url: `http://localhost:8000/gen/arith${queryString}`,
+    url: `/gen/arith${queryString}`,
   })
     .then((response) => {
       problems = response.data;
@@ -20,7 +20,7 @@ export const genLinear = (count, updateState) => {
   if (count) queryString = `${queryString}count=${count}`
   axios({
     method: "get",
-    url: `http://localhost:8000/gen/alg/linear${queryString}`,
+    url: `/gen/alg/linear${queryString}`,
   })
     .then((response) => {
       problems = response.data;
