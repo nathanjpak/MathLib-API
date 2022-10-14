@@ -8,6 +8,9 @@ const GeneratorForm = () => {
   const { register, handleSubmit } = useForm();
 
   const [problems, setProblems] = useState([]);
+  
+  const [hideSolutions, setSolutions] = useState(false);
+  const toggleHideSolutions = () => setSolutions(!hideSolutions);
 
   const onSubmit = (data) => {
     console.log(data);
@@ -37,6 +40,8 @@ const GeneratorForm = () => {
       <label htmlFor="problemsCount">Number of Problems</label>
       <input className="input-100" {...register("problemsCount", { min: 1, max: 100 })} type="number" placeholder="Default: 20" />
       <button className="generate-button" type="submit">Generate</button>
+      <input onChange={toggleHideSolutions} type="checkbox"></input>
+      <label>Hide solutions?</label>
     </form>
     {/* <button onClick={() => console.log(problems)}>State</button> */}
     <div className="generated-problems">
@@ -44,7 +49,7 @@ const GeneratorForm = () => {
         <div className="generated-problem" key={`problem${index}`}> 
           <h3>Problem {index+1}</h3>
           <p><MathJax>{`$${problem.problem}$`}</MathJax></p>
-          <p>Solution&#40;s&#41;: {problem.solution}</p>
+          {(!hideSolutions) && (<p>Solution&#40;s&#41;: {problem.solution}</p>)}
         </div>
       ))}
     </div>
